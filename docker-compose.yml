@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # Database container - holds SQLite volume
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: Dockerfile
+    container_name: dropmail-db
+    volumes:
+      - db-data:/data
+    networks:
+      - dropmail-internal
+    restart: unless-stopped
+
+  # Backend API service
+  backend:
+    build:
+      context: ./dropmail-backend
+      dockerfile: Dockerfile
+    container_name: dropmail-backend
+    environment:
+      - DB_PATH=/data/dropmail.db
+      - PORT=8080
+      - TURNSTILE_SECRET=${TURNSTILE_SECRET}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+    volumes:
+      - db-data:/data
+    networks:
+      - dropmail-internal
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # Frontend static files service
+  frontend:
+    build:
+      context: ./dropmail-frontend
+      dockerfile: Dockerfile
+    container_name: dropmail-frontend
+    networks:
+      - dropmail-internal
+    restart: unless-stopped
+
+  # Reverse proxy - only container exposed to host
+  proxy:
+    build:
+      context: ./docker/proxy
+      dockerfile: Dockerfile
+    container_name: dropmail-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/ssl:ro
+    networks:
+      - dropmail-internal
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+
+networks:
+  dropmail-internal:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

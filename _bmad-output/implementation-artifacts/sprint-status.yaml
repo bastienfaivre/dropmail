@@ -1,0 +1,77 @@
+# generated: 2026-01-23
+# project: app
+# project_key: dropmail
+# tracking_system: file-system
+# story_location: /app/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-01-23
+project: app
+project_key: dropmail
+tracking_system: file-system
+story_location: /app/_bmad-output/implementation-artifacts
+
+development_status:
+  # Epic 1: Project Foundation & Deployable Infrastructure
+  epic-1: done
+  1-1-initialize-project-structure-with-starter-templates: done
+  1-2-docker-container-configuration: done
+  1-3-environment-configuration-startup-validation: done
+  1-4-health-checks-database-initialization: done
+  epic-1-retrospective: optional
+
+  # Epic 2: Core Email Collection with Security
+  epic-2: done
+  2-1-backend-submit-endpoint-with-validation: review
+  2-2-cors-rate-limiting-middleware: review
+  2-3-cloudflare-turnstile-backend-verification: review
+  2-4-frontend-form-with-client-side-validation: review
+  2-5-turnstile-widget-integration: review
+  2-6-https-enforcement-via-proxy: review
+  epic-2-retrospective: optional
+
+  # Epic 3: Multi-Property Embedding & Source Tracking
+  epic-3: done
+  3-1-source-parameter-capture-storage: review
+  3-2-iframe-embedding-support: review
+  3-3-responsive-form-layout: review
+  3-4-browser-compatibility-container-adaptation: review
+  3-5-data-access-export-documentation: review
+  epic-3-retrospective: optional
+
+  # Epic 4: Accessibility & Production Polish
+  epic-4: done
+  4-1-keyboard-navigation-form-submission: done
+  4-2-screen-reader-support-aria: done
+  4-3-visual-accessibility: done
+  4-4-performance-optimization: done
+  4-5-production-reliability-zero-maintenance: done
+  epic-4-retrospective: optional

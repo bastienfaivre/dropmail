@@ -57,7 +57,7 @@ async function submitFormWithToken(token: string): Promise<void> {
   const email = emailInput.value.trim();
 
   try {
-    const response = await fetch(import.meta.env.VITE_API_ENDPOINT || '/api/submit', {
+    const response = await fetch(window.__ENV__?.VITE_API_ENDPOINT || import.meta.env.VITE_API_ENDPOINT || '/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

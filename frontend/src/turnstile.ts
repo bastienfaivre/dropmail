@@ -1,5 +1,9 @@
 declare global {
   interface Window {
+    __ENV__?: {
+      VITE_API_ENDPOINT?: string;
+      VITE_TURNSTILE_SITE_KEY?: string;
+    };
     turnstile: {
       render: (
         container: string | HTMLElement,
@@ -27,7 +31,7 @@ let widgetId: string | null = null;
 let currentCallback: TurnstileCallback | null = null;
 let currentErrorCallback: TurnstileErrorCallback | null = null;
 
-const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000BB';
+const SITE_KEY = window.__ENV__?.VITE_TURNSTILE_SITE_KEY || import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000BB';
 
 function isTurnstileLoaded(): boolean {
   return typeof window.turnstile !== 'undefined';

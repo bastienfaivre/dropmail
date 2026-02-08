@@ -1,69 +1,31 @@
-version: '3.8'
-
 services:
-  # Database container - holds SQLite volume
-  db:
-    build:
-      context: ./docker/db
-      dockerfile: Dockerfile
-    container_name: dropmail-db
-    volumes:
-      - db-data:/data
-    networks:
-      - dropmail-internal
-    restart: unless-stopped
-
-  # Backend API service
   backend:
-    build:
-      context: ./dropmail-backend
-      dockerfile: Dockerfile
-    container_name: dropmail-backend
+    image: golang:1.25
+    container_name: backend
     environment:
-      - DB_PATH=/data/dropmail.db
-      - PORT=8080
-      - TURNSTILE_SECRET=${TURNSTILE_SECRET}
-      - CORS_ORIGINS=${CORS_ORIGINS}
+      - GIN_MODE=release
+      - TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+      - VALID_SOURCES=unknown,source1,source2
+    working_dir: /app
     volumes:
-      - db-data:/data
-    networks:
-      - dropmail-internal
-    depends_on:
-      - db
-    restart: unless-stopped
-
-  # Frontend static files service
-  frontend:
-    build:
-      context: ./dropmail-frontend
-      dockerfile: Dockerfile
-    container_name: dropmail-frontend
-    networks:
-      - dropmail-internal
-    restart: unless-stopped
-
-  # Reverse proxy - only container exposed to host
-  proxy:
-    build:
-      context: ./docker/proxy
-      dockerfile: Dockerfile
-    container_name: dropmail-proxy
+      - ./backend:/app
+      - ./data:/data
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certs:/etc/nginx/ssl:ro
-    networks:
-      - dropmail-internal
-    depends_on:
-      - backend
-      - frontend
+      - "8080:8080"
+    tty: true
+    stdin_open: true
     restart: unless-stopped
 
-networks:
-  dropmail-internal:
-    driver: bridge
-
-volumes:
-  db-data:
-    driver: local
+  frontend:
+    image: node:latest
+    container_name: frontend
+    environment:
+      - VITE_API_ENDPOINT=http://localhost:8080/api/submit
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    restart: unless-stopped

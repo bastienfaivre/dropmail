@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Subscribe to our newsletter to stay up to date with the latest news and updates." />
+    <title>Subscribe - Dropmail</title>
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <form id="subscribe-form" novalidate>
+        <div class="field-container">
+          <div class="input-wrapper">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+              aria-label="Email address"
+              aria-describedby="email-error"
+            />
+            <button type="submit" id="submit-btn">Subscribe</button>
+          </div>
+          <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+          <div id="turnstile-container"></div>
+        </div>
+      </form>
+      <div id="success-message" class="success-message" role="status" aria-live="polite" hidden>
+        Thanks! You're subscribed.
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

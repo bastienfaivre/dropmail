@@ -1,0 +1,31 @@
+services:
+  backend:
+    image: dropmail-backend:latest
+    container_name: dropmail-backend
+    environment:
+      - PORT=8080
+      - DB_PATH=/data/dropmail.db
+      - TURNSTILE_SECRET=...
+      - VALID_SOURCES=...
+      - RESEND_API_KEY=...
+      - RESEND_FROM=...
+      - SUMMARY_EMAIL=...
+      - SUMMARY_SCHEDULE=...
+      - GIN_MODE=release
+    volumes:
+      - ./data:/data
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    image: dropmail-frontend:latest
+    container_name: dropmail-frontend
+    environment:
+      - VITE_API_ENDPOINT=...
+      - VITE_TURNSTILE_SITE_KEY=...
+    ports:
+      - "3001:3000"
+    tty: true
+    stdin_open: true
+    restart: unless-stopped

@@ -1,0 +1,223 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: #213547;
+  background-color: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-rgb: 37, 99, 235;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #ffffffde;
+    background-color: #1a1a1a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+#app {
+  width: 100%;
+  max-width: min(500px, calc(100vw - 2rem));
+  padding: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.field-container {
+  position: relative;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: stretch;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="email"] {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: #1a1a1a;
+  min-height: 44px;
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-wrapper {
+    background-color: #2d2d2d;
+    border-color: #4a4a4a;
+  }
+
+  input[type="email"] {
+    color: #ffffff;
+  }
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3);
+}
+
+.input-wrapper.invalid {
+  border-color: #dc2626;
+}
+
+.input-wrapper.invalid:focus-within {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+}
+
+button[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+button[type="submit"]:focus {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.5);
+}
+
+button[type="submit"]:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  font-size: 0.875rem;
+  color: #dc2626;
+  z-index: 10;
+  margin-top: 0;
+}
+
+.error-message:empty {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    color: #f87171;
+  }
+}
+
+.success-message {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #059669;
+  background-color: #d1fae5;
+  border-radius: 0.5rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .success-message {
+    background-color: #064e3b;
+    color: #34d399;
+  }
+}
+
+#turnstile-container {
+  position: absolute;
+  top: calc(100% + 2rem);
+  left: 0;
+  right: 0;
+  min-height: 0;
+}
+
+#turnstile-container:empty {
+  display: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+html {
+  min-height: 200px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #app {
+    transition: opacity 0.2s ease;
+  }
+}
+

@@ -32,7 +32,7 @@ func NewSubmitHandler(db *database.DB, verifier TurnstileVerifier, validSources 
 	return &SubmitHandler{db: db, verifier: verifier, validSources: sourceMap}
 }
 
-const maxBodySize = 1024
+const maxBodySize = 2048
 
 func (h *SubmitHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {

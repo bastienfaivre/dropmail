@@ -32,14 +32,14 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 1rem;
+  padding: 0;
   overflow-y: auto;
 }
 
 #app {
   width: 100%;
-  max-width: min(500px, calc(100vw - 2rem));
-  padding: 1.5rem;
+  max-width: 500px;
+  padding: 0;
 }
 
 form {
@@ -71,6 +71,7 @@ input[type="email"] {
   background-color: transparent;
   color: #1a1a1a;
   min-height: 44px;
+  min-width: 0;
   outline: none;
 }
 
@@ -220,4 +221,3 @@ html {
     transition: opacity 0.2s ease;
   }
 }
-

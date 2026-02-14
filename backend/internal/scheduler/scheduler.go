@@ -76,6 +76,11 @@ func (s *DailySummary) run(ctx context.Context) {
 		return
 	}
 
+	if len(submissions) == 0 {
+		slog.Info("daily summary: no submissions to report, skipping email")
+		return
+	}
+
 	if err := s.mailer.SendDailySummary(submissions); err != nil {
 		slog.Error("daily summary: failed to send email", "error", err)
 		return

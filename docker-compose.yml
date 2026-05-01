@@ -1,6 +1,6 @@
 services:
   backend:
-    image: golang:1.25
+    image: golang:1.26
     container_name: backend
     environment:
       - GIN_MODE=release

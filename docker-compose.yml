@@ -1,10 +1,11 @@
 services:
   backend:
-    image: golang:1.26
+    image: golang:1.27
     container_name: backend
     environment:
       - GIN_MODE=release
       - TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+      - CORS_ORIGINS=http://localhost:3000
       - VALID_SOURCES=unknown,source1,source2
     working_dir: /app
     volumes:

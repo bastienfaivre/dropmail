@@ -26,14 +26,18 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: auto;
+}
+
 body {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
-  overflow-y: auto;
+  overflow: clip;
 }
 
 #app {
@@ -211,10 +215,6 @@ button[type="submit"]:disabled {
   display: none !important;
 }
 
-
-html {
-  min-height: 200px;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   #app {

@@ -7,7 +7,7 @@ import (
 
 	"backend/internal/model"
 
-	"github.com/resend/resend-go/v3"
+	"github.com/resend/resend-go/v4"
 )
 
 // Client wraps the Resend SDK to send summary emails.
